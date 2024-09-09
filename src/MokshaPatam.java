@@ -24,6 +24,7 @@ public class MokshaPatam {
      *  to reach the final square on a board with the given size, ladders, and snakes.
      */
     public static int fewestMoves(int boardsize, int[][] ladders, int[][] snakes) {
+        //intialize instance variables
         int totalmoves = 0;
         int currentplace = 0;
         int tempincrease = 0;
@@ -35,13 +36,16 @@ public class MokshaPatam {
         makeSnakeBoard();
         makeStepBoard();
         Queue<Integer> order = new LinkedList<Integer>();
+        //add 1 to queue
         order.add(1);
 //        System.out.println("start");
         //while queue isn't empty keep running
         while (!order.isEmpty()){
             //set current place to first place in queue
             currentplace = order.remove();
+            //save orginal starting place
             orgcp = currentplace;
+            //totalmoves = saved total moves from previous blocks
             totalmoves = stepBoard[currentplace];
             //add one move
             totalmoves++;
@@ -82,19 +86,19 @@ public class MokshaPatam {
                 }
             //if currentplace = the end return total moves
             if (currentplace == boardsize){
-                for (int i = 0; i < stepBoard.length; i++){
-                    System.out.print("#" + i + " ");
-                    System.out.println(stepBoard[i] + " ");
-                }
+//                for (int i = 0; i < stepBoard.length; i++){
+//                    System.out.print("#" + i + " ");
+//                    System.out.println(stepBoard[i] + " ");
+//                }
 //                System.out.println("total: " + totalmoves);
                 return stepBoard[boardsize];
             }
         }
-        //return total moves
-        System.out.println(stepBoard[boardsize]);
-        return stepBoard[boardsize];
+        //if queue runs empty return -1
+        return -1;
     }
 
+    //make seperate board just for checking ladders
     public static void makeLadderBoard(){
         ladderBoard = new int[size+1];
         for (int i = 0; i < ladder.length; i++){
@@ -104,7 +108,7 @@ public class MokshaPatam {
 //            System.out.print(ladderBoard[i]);
 //        }
     }
-
+    //make sperate board just for checking snakes
     public static void makeSnakeBoard(){
         snakeBoard = new int[size+1];
         for (int i = 0; i < snake.length; i++){
@@ -112,6 +116,7 @@ public class MokshaPatam {
         }
     }
 
+    //make seperate board just to keep track of moves it took to get to a spot
     public static void makeStepBoard(){
         stepBoard= new int[size+1];
     }
